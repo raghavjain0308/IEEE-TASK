@@ -1,0 +1,157 @@
+Q.1)
+
+
+def isgauranteed(s):
+    if (len(s)%2!=0):
+        return False
+    return s == s[::-1]
+t = int(input("Enter number of test cases: "))
+i=0
+while(i<t):
+    n = int(input("Enter length of string: "))
+    str = input("Enter the string: ")
+    s = isgauranteed(str)
+    if (s):
+        print("Yes")
+    else:
+        print("No")
+    i=i+1
+
+Q.2)
+"Alphabet - pattern"
+
+code:
+
+n=int(input("Enter value: "))
+row=1
+numst1=n;
+numst2=n-1;
+numsp=0;
+val=65
+while (row<=2*n-1):
+    num=0
+    i=1
+    while (i <= numst1):
+        print(chr(val+num),end="")
+        num=num+1
+        i=i+1
+    if row==0 or row==2*n-1:
+        num=num-2
+    else:
+        num=num-1
+    s = 1
+    while (s <= numsp):
+	    print(end=" ")
+	    s=s+1
+
+    j = 1
+    while (j <= numst2):
+	    print(chr(val+num),end="")
+	    num=num-1
+	    j=j+1
+	
+    if (row == 1):
+	    numst1=numst1-1
+	    numsp=numsp+1
+    elif (row < n): 
+	    numst1=numst1-1
+	    numst2=numst2-1;
+	    numsp=numsp+2;
+    elif (row == 2*n - 2):
+        numst1=numst1+1
+        numsp=numsp-1
+    else:
+	    numst1=numst1+1
+	    numst2=numst2+1
+	    numsp=numsp-2
+    
+    print()
+    row=row+1
+
+"Z - pattern"
+
+code
+
+n=int(input("Enter value: "))
+i=1
+j=n-1
+for row in range(0,n+1):
+    for col in range(0,n+1):
+        if row==0 or row==n:
+            print("*",end="")
+        elif row==i and col==j:
+            print("*",end="")
+            i=i+1
+            j=j-1
+        else:
+            print(end=" ")
+    print()
+
+
+
+
+
+Q.3)
+
+n = int(input("Enter number of key value pair u want: "))
+d = dict(input("Enter key and value: ").split() for _ in range(n))
+res1 = {key: val for key, val in sorted(d.items(), key = lambda ele: ele[0])}
+res2 = {key: val for key, val in sorted(d.items(), key = lambda ele: ele[1])}
+print("Dictionary sorted by keeping keys in ascending arder: ")
+print(res1)
+print("Dictionary sorted by keeping values in ascending arder: ")
+print(res2)
+
+
+
+
+
+Q.4)
+
+class BinaryToRoman:
+    def _init_(self,data):
+        self.data=data
+    
+    def binaryToDecimal(self):
+        binary=self.data
+        decimal,i,n=0,0,0
+        while(binary != 0):
+            dec = binary % 10
+            decimal = decimal + dec * pow(2, i)
+            binary = binary//10
+            i += 1
+        self.data=decimal
+    
+    def intToRoman(self):
+        num = self.data
+        m = ["", "M", "MM", "MMM"]
+        c = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM "]
+        x = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]
+        i = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"]
+        thousands = m[num // 1000]
+        hundreds = c[(num % 1000) // 100]
+        tens = x[(num % 100) // 10]
+        ones = i[num % 10]
+        ans = (thousands + hundreds + tens + ones)
+        return ans
+
+ob = BinaryToRoman(110111011101)
+ob.binaryToDecimal()
+print(ob.intToRoman())
+
+
+
+
+Q.5)
+
+class py_solution:
+    def sub_sets(self, sset):
+        return self.subsetsRecur([], sorted(sset))
+    
+    def subsetsRecur(self, current, sset):
+        if sset:
+            return self.subsetsRecur(current, sset[1:]) + self.subsetsRecur(current + [sset[0]], sset[1:])
+        return [current]
+
+print(py_solution().sub_sets([4,5,6]))
+
