@@ -28,7 +28,7 @@
 module Hardware
           (W1,
            W2,
-           W3,nonce,
+           nonce,
            H0,
            H1,
            H2,
@@ -42,8 +42,8 @@ module Hardware
 
 
   input   [31:0] W1;  // uint32
-  input   [31:0] W2;  // uint32
-  input   [31:0] W3,nonce;  // uint32
+  input   [30:0] W2;  // uint32
+  input   [31:0] nonce;  // uint32
   input   [31:0] H0;  // uint32
   input   [31:0] H1;  // uint32
   input   [31:0] H2;  // uint32
@@ -67,6 +67,9 @@ module Hardware
   wire [31:0] SHA2_out1;  // uint32
   wire [31:0] SHA2_out2;  // uint32
 
+  wire [31:0] W3;
+
+assign W3 = 32'd437006492;
 
   SHA1 u_SHA1 (.clk1(1'b0),
 		.clk2(1'b0),
@@ -77,7 +80,7 @@ module Hardware
                 .clkm_p1(1'b0),
 		.reset(1'b0),
                .Input_rsvd(W1),  // uint32
-               .Input1(W2),  // uint32
+               .Input1({1'b0,W2}),  // uint32
                .Input2(W3),  // uint32
                .nonce(nonce),
                .H0(H0),  // uint32
